@@ -11,7 +11,7 @@ class CreateCoreUsers < ActiveRecord::Migration[5.2]
       t.inet :last_sign_in_ip
       t.datetime :last_sign_in_at
 
-      t.uuid :person_id
+      t.uuid :contact_id
 
       t.timestamps null: false
     end

@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_01_18_213015) do
     t.datetime "locked_at"
     t.inet "last_sign_in_ip"
     t.datetime "last_sign_in_at"
-    t.uuid "person_id"
+    t.uuid "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
