@@ -1,5 +1,4 @@
 class Auth::PasswordsController < Clearance::PasswordsController
-  respond_to :json
 
   def create
     if user = find_user_for_create

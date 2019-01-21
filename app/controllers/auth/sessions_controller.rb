@@ -1,5 +1,4 @@
-class Auth::SessionsControllerController < Clearance::SessionsController
-  respond_to :json
+class Auth::SessionsController < Clearance::SessionsController
 
   # Override Clearance::SessionsController#create
   def create

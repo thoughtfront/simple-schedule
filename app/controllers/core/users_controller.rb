@@ -1,5 +1,4 @@
 class Core::UsersController < Clearance::UsersController
-  respond_to :json
 
   def create
     @user = user_from_params
