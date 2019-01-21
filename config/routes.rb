@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resource :password, controller: 'clearance/passwords', only: [:create, :update]
   end
 
+  get '/test' => 'test#index', as: 'test_index'
+
 end
