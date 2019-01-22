@@ -14,8 +14,13 @@ ActiveRecord::Schema.define(version: 2019_01_21_224740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "core_events", force: :cascade do |t|
+    t.text "description"
+    t.integer "event_id"
+    t.integer "location_id"
+    t.integer "event_category_id"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
