@@ -1,3 +1,3 @@
 class Core::Event < ApplicationRecord
-    :title 
+     validates :title, presence: :true
 end
