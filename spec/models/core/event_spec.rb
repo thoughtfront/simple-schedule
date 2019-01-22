@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Core::Event, type: :model do
-  context 'addociations' do
+  context 'associations' do
     it {is_expected.to have_many(:location)}
   end
-  
+
   context '.save' do
     it 'succeeds' do
       test_event = build(:core_event)
