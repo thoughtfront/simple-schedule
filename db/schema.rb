@@ -28,9 +28,11 @@ ActiveRecord::Schema.define(version: 2019_01_22_015529) do
 
   create_table "core_locations", force: :cascade do |t|
     t.integer "address_id"
+    t.bigint "event_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_core_locations_on_event_id"
   end
 
 end

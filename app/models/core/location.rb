@@ -1,5 +1,4 @@
 class Core::Location < ApplicationRecord
-    # belongs_to :event
-    :address_id
+    has_many :event
     validates :name, presence: :true
 end
