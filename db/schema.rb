@@ -16,23 +16,18 @@ ActiveRecord::Schema.define(version: 2019_01_22_015529) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "core_events", force: :cascade do |t|
+  create_table "core_events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.text "description"
-    t.integer "event_id"
-    t.integer "location_id"
-    t.integer "event_category_id"
     t.string "title"
+    t.uuid "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "core_locations", force: :cascade do |t|
-    t.integer "address_id"
-    t.bigint "event_id"
+  create_table "core_locations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_core_locations_on_event_id"
   end
 
 end

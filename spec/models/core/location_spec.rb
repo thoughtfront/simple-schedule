@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Core::Location, type: :model do
 
   context 'associations' do
-    it {is_expected.to have_many(:event)}
+    it {is_expected.to have_many(:events)}
   end
 
   context '.save' do

@@ -6,8 +6,6 @@ RSpec.describe Core::Event, type: :model do
     it {is_expected.to belong_to(:location)}
   end
 
-  puts("count: #{Core::Event.count}")
-
   context '.save' do
     it 'succeeds' do
       test_event = build(:core_event)
@@ -21,4 +19,5 @@ RSpec.describe Core::Event, type: :model do
       expect(test_event.valid?).to be(false)
     end
   end
+  
 end
