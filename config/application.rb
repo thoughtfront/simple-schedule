@@ -15,9 +15,11 @@ module SimpleSchedule
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    # config.action_dispatch.default_headers = {
-    #   'Access-Control-Allow-Origin' => 'http://local.app.simpleschedule.com:3001',
-    #   'Access-Control-Request-Method' => %w{GET POST OPTIONS PUT PATCH DELETE}.join(",")
-    # }
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'http://local.app.simpleschedule.com:3001'
+        resource '*', :headers => :any, :methods => :any, :credentials => true
+      end
+    end
   end
 end
