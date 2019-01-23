@@ -6,5 +6,6 @@ module OptionsRequest
     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     headers['Access-Control-Max-Age'] = '1000'
     headers['Access-Control-Allow-Headers'] = '*,x-requested-with'
+    headers['Access-Control-Allow-Credentials'] = 'true'
   end
 end
