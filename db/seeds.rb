@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Core::User.create({
-  email: 'simp@tf.com',
+  email: 'test@tf.com',
   password: 'test123',
   confirmation_token: 'test123'
 });
