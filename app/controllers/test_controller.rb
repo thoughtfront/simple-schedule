@@ -1,4 +1,5 @@
 class TestController < ApplicationController
+  include Authorization
   before_action :require_login
 
   # Override Clearance::SessionsController#create
