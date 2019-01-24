@@ -29,6 +29,8 @@ gem 'uglifier', '>= 1.3.0'
 # Authentication
 gem 'clearance', '~> 1.16.1'
 
+gem 'rack-cors', '~> 1.0.2'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
