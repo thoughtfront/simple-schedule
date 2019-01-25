@@ -4,6 +4,6 @@ class Core::EventCategory < ApplicationRecord
   has_many :events
 
   #Validations
-  validates :name, presence :true
+  validates :name, presence: :true
 
 end
