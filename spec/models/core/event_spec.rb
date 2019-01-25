@@ -9,7 +9,7 @@ RSpec.describe Core::Event, type: :model do
   context '.save' do
     it 'succeeds' do
       test_event = build(:core_event)
-      expect(test_event.save).to be_truthy
+      expect(test_event.save).to be(true)
     end
   end
   

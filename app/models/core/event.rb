@@ -1,5 +1,9 @@
 class Core::Event < ApplicationRecord
-     belongs_to :location, optional: true
-     validates :title, presence: :true
-     :location_id
+
+  #Associations
+  belongs_to :location, optional: true
+
+  #Validations
+  validates :title, presence: :true
+  
 end

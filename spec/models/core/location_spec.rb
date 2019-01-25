@@ -10,7 +10,7 @@ RSpec.describe Core::Location, type: :model do
   context '.save' do
     it 'succeeds' do
       test_location = build(:core_location)
-      expect(test_location.save).to be_truthy
+      expect(test_location.save).to be(true)
     end
   end
 
