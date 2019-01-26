@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2019_01_25_131230) do
   enable_extension "uuid-ossp"
 
   create_table "core_event_categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "event_id"
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
@@ -26,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_01_25_131230) do
 
   create_table "core_events", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "location_id"
+    t.uuid "event_category_id"
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
