@@ -4,6 +4,7 @@ RSpec.describe Core::Event, type: :model do
 
   context 'associations' do
     it {is_expected.to belong_to(:location)}
+    it {is_expected.to belong_to(:event_category)}
   end
 
   context '.save' do
