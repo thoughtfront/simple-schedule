@@ -9,9 +9,9 @@ RSpec.describe Core::Email, type: :model do
 
   context 'validations' do
     it 'requires a value' do
-      test_email = build(:core_email, name:nil)
+      test_email = build(:core_email, value:nil)
       expect(test_email.valid?).to be(false)
     end
   end
-  
+
 end

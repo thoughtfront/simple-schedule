@@ -5,7 +5,7 @@ class Core::Email < ApplicationRecord
     # has_one :organization
 
     #Validations
-    validates :value, prescene: :true
+    validates :value, presence: :true
     
   end
   
