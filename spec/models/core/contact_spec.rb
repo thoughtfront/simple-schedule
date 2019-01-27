@@ -1,0 +1,39 @@
+require 'rails_helper'
+
+RSpec.describe Core::Contact, type: :model do
+
+    context 'associations' do
+      it {is_expected.to have_one(:user)}
+      # it {is_expected.to have_many(:addresses)}
+      # it {is_expected.to have_many(:phones)}
+      # it {is_expected.to have_many(:emails)}
+      # it {is_expected.to belong_to(:organization)}
+      # it {is_expected.to belong_to{:primary_email}}
+      # it {is_expected.to belong_to{:primary_phone}}
+      # it {is_expected.to belong_to{:primary_address}}
+    end
+
+    context 'validations' do
+      it 'is not valid without first_name' do
+        contact = build(:core_contact, first_name: nil)
+        expect(contact.valid?).to be(false);
+      end
+
+      it 'is not valid without last_name' do
+        contact = build(:core_contact, last_name: nil)
+        expect(contact.valid?).to be(false);
+      end
+
+      # it 'is not valid without primary_email' do
+      #   contact = build(:core_contact, primary_email: nil)
+      #   expect(contact.valid?).to be(false);
+      # end
+
+      # it 'is not valid if user email is not primary email' do
+      #   contact = create(:core_contact)
+      #   user = create(:core_user, contact: contact, email: "wrong@tf.com")
+      #   expect(contact.valid?).to be(false);
+      # end
+    end
+
+end
