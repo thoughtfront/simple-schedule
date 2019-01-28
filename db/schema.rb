@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2019_01_27_014629) do
     t.index ["primary_phone_id"], name: "index_core_contacts_on_primary_phone_id"
   end
 
-  create_table "core_emails", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "core_emails", force: :cascade do |t|
     t.string "value", null: false
     t.string "label"
     t.datetime "created_at", null: false
