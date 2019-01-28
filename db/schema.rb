@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2019_01_26_224941) do
+ActiveRecord::Schema.define(version: 2019_01_27_014629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "core_addresses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "address_one", null: false
+    t.string "address_two"
+    t.string "city", null: false
+    t.string "state_region", null: false
+    t.string "country", null: false
+    t.string "postal_code", null: false
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "core_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "prefix"
@@ -37,7 +48,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_224941) do
     t.index ["primary_phone_id"], name: "index_core_contacts_on_primary_phone_id"
   end
 
-  create_table "core_emails", force: :cascade do |t|
+  create_table "core_emails", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "value", null: false
     t.string "label"
     t.datetime "created_at", null: false
