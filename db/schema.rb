@@ -28,6 +28,26 @@ ActiveRecord::Schema.define(version: 2019_01_27_014629) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "core_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "prefix"
+    t.string "first_name", null: false
+    t.string "middle_name"
+    t.string "last_name", null: false
+    t.string "suffix"
+    t.string "gender"
+    t.date "birth_date"
+    t.uuid "organization_id", null: false
+    t.uuid "primary_email_id", null: false
+    t.uuid "primary_phone_id"
+    t.uuid "primary_address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_core_contacts_on_organization_id"
+    t.index ["primary_address_id"], name: "index_core_contacts_on_primary_address_id"
+    t.index ["primary_email_id"], name: "index_core_contacts_on_primary_email_id"
+    t.index ["primary_phone_id"], name: "index_core_contacts_on_primary_phone_id"
+  end
+
   create_table "core_emails", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "value", null: false
     t.string "label"
