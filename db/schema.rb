@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2019_01_26_224941) do
 
   # These are extensions that must be enabled in order to support this database
@@ -34,6 +35,13 @@ ActiveRecord::Schema.define(version: 2019_01_26_224941) do
     t.index ["primary_address_id"], name: "index_core_contacts_on_primary_address_id"
     t.index ["primary_email_id"], name: "index_core_contacts_on_primary_email_id"
     t.index ["primary_phone_id"], name: "index_core_contacts_on_primary_phone_id"
+  end
+
+  create_table "core_emails", force: :cascade do |t|
+    t.string "value", null: false
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "core_event_categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
