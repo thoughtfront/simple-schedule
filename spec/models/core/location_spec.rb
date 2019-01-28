@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: core_locations
+#
+#  id          :uuid             not null, primary key
+#  address_id  :uuid
+#  name        :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Core::Location, type: :model do

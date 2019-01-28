@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: core_event_categories
+#
+#  id          :uuid             not null, primary key
+#  name        :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Core::EventCategory, type: :model do
