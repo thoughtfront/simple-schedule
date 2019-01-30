@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: core_addresses
+#
+#  id           :uuid             not null, primary key
+#  address_one  :string           not null
+#  address_two  :string
+#  city         :string           not null
+#  state_region :string           not null
+#  country      :string           not null
+#  postal_code  :string           not null
+#  label        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 FactoryBot.define do
   factory :core_address, class: 'Core::Address' do
 
