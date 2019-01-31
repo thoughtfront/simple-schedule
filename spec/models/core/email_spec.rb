@@ -2,7 +2,7 @@
 #
 # Table name: core_emails
 #
-#  id         :bigint(8)        not null, primary key
+#  id         :uuid             not null, primary key
 #  value      :string           not null
 #  label      :string
 #  created_at :datetime         not null
