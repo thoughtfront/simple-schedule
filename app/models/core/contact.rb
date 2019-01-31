@@ -11,7 +11,7 @@
 #  gender             :string
 #  birth_date         :date
 #  organization_id    :uuid             not null
-#  primary_email_id   :uuid             not null
+#  primary_email_id   :uuid             not null 
 #  primary_phone_id   :uuid
 #  primary_address_id :uuid
 #  created_at         :datetime         not null
