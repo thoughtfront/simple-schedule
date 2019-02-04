@@ -28,7 +28,7 @@ class Core::Contact < ApplicationRecord
   # belong_to :organization
   # belong_to :primary_email
   # belong_to :primary_phone
-  # belong_to :primary_address
+  belongs_to :primary_address, class_name: Core::Address.name
 
   #Validations
   validates :first_name, presence: :true
