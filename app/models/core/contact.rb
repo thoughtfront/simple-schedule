@@ -26,7 +26,7 @@ class Core::Contact < ApplicationRecord
   # have_many :phones
   # have_many :emails
   # belong_to :organization
-  # belong_to :primary_email
+  belongs_to :primary_email, class_name: Core::Email.name
   # belong_to :primary_phone
   # belong_to :primary_address
 
