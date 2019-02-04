@@ -29,7 +29,7 @@ RSpec.describe Core::Contact, type: :model do
       # it {is_expected.to have_many(:emails)}
       # it {is_expected.to belong_to(:organization)}
       # it {is_expected.to belong_to{:primary_email}}
-      # it {is_expected.to belong_to{:primary_phone}}
+      it {is_expected.to belong_to(:primary_phone)}
       # it {is_expected.to belong_to{:primary_address}}
     end
 
