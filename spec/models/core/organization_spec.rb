@@ -35,7 +35,7 @@ RSpec.describe Core::Organization, type: :model do
       expect(organization.valid?).to be(false)
     end
 
-    it 'is not valid without statis' do
+    it 'is not valid without status' do
       organization = build(:core_organization, status: nil)
       expect(organization.valid?).to be(false)
     end
