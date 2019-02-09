@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_031709) do
+ActiveRecord::Schema.define(version: 2019_02_06_134612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 2019_02_04_031709) do
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "core_addresses_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "address_id"
+    t.uuid "contact_id"
   end
 
   create_table "core_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -46,6 +51,13 @@ ActiveRecord::Schema.define(version: 2019_02_04_031709) do
     t.index ["primary_address_id"], name: "index_core_contacts_on_primary_address_id"
     t.index ["primary_email_id"], name: "index_core_contacts_on_primary_email_id"
     t.index ["primary_phone_id"], name: "index_core_contacts_on_primary_phone_id"
+  end
+
+  create_table "core_contacts_phones", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "phone_id"
+    t.string "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "core_emails", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
