@@ -14,7 +14,6 @@ require 'rails_helper'
 RSpec.describe Core::Phone, type: :model do
 
   context 'associations' do
-    # it {is_expected.to have_one(:organization)}
     it {is_expected.to have_and_belong_to_many(:contacts)}
   end
 

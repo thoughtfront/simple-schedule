@@ -16,7 +16,7 @@ RSpec.describe Core::Location, type: :model do
 
   context 'associations' do
     it {is_expected.to have_many(:events)}
-    # it {is_expected.to belong_to(:address)}
+    it {is_expected.to belong_to(:address)}
   end
 
   context '.save' do
