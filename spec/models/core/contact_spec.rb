@@ -28,9 +28,9 @@ RSpec.describe Core::Contact, type: :model do
       it {is_expected.to have_and_belong_to_many(:phones)}
       # it {is_expected.to have_many(:emails)}
       # it {is_expected.to belong_to(:organization)}
-      # it {is_expected.to belong_to{:primary_email}}
-      # it {is_expected.to belong_to{:primary_phone}}
-      # it {is_expected.to belong_to{:primary_address}}
+      it {is_expected.to belong_to(:primary_email).class_name(Core::Email.name)}
+      it {is_expected.to belong_to(:primary_phone).class_name(Core::Phone.name)}
+      it {is_expected.to belong_to(:primary_address).class_name(Core::Address.name)}
     end
 
     context 'validations' do

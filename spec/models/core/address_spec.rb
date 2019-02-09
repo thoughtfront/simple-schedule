@@ -19,7 +19,7 @@ require 'rails_helper'
 RSpec.describe Core::Address, type: :model do
   context 'association' do
     it {is_expected.to have_many(:locations)}
-    # it {is_expected.to have_many(:contacts)}
+    it {is_expected.to have_and_belong_to_many(:contacts)}
   end
 
   context 'validations' do

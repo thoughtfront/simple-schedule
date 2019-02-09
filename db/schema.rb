@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 2019_02_05_003445) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "core_addresses_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "address_id"
+    t.uuid "contact_id"
+  end
+
   create_table "core_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "prefix"
     t.string "first_name", null: false
@@ -82,6 +87,18 @@ ActiveRecord::Schema.define(version: 2019_02_05_003445) do
     t.uuid "address_id"
     t.string "name"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "core_organizations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.uuid "primary_contact_id"
+    t.uuid "primary_email_id", null: false
+    t.uuid "primary_address_id"
+    t.uuid "primary_phone_id"
+    t.string "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
