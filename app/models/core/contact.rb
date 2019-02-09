@@ -23,7 +23,7 @@ class Core::Contact < ApplicationRecord
   #Associations
   has_one :user
   has_and_belongs_to_many :addresses
-  has_and_belongs_to_many :phones]
+  has_and_belongs_to_many :phones
   # have_many :emails
   belongs_to :organization
   belongs_to :primary_email, class_name: Core::Email.name
