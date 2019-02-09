@@ -50,8 +50,8 @@ contact = Core::Contact.create({
 
 contact.addresses << address1
 contact.addresses << address2
-# contact.emails << email1
-# contact.emails << emails2
+contact.emails << email1
+contact.emails << email2
 
 Core::User.create({
   email: email1.value,
