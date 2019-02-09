@@ -11,7 +11,7 @@
 #  gender             :string
 #  birth_date         :date
 #  organization_id    :uuid             not null
-#  primary_email_id   :uuid             not null 
+#  primary_email_id   :uuid             not null
 #  primary_phone_id   :uuid
 #  primary_address_id :uuid
 #  created_at         :datetime         not null
@@ -25,10 +25,10 @@ class Core::Contact < ApplicationRecord
   # have_many :addresses
   # have_many :phones
   # have_many :emails
-  # belong_to :organization
-  # belong_to :primary_email
-  belongs_to :primary_phone, class_name: Core::Phone.name
-  # belong_to :primary_address
+  belongs_to :organization
+  belongs_to :primary_email, class_name: Core::Email.name
+  belongs_to :primary_phone, class_name: Core::Phone.name, optional: true
+  belongs_to :primary_address, class_name: Core::Address.name, optional: true
 
   #Validations
   validates :first_name, presence: :true
