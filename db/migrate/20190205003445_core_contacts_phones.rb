@@ -4,5 +4,8 @@ class CoreContactsPhones < ActiveRecord::Migration[5.2]
       t.string :phone_id
       t.string :contact_id
     end
+
+    add_index :core_contacts_phones, :phone_id
+    add_index :core_contacts_phones, :contact_id
   end
 end

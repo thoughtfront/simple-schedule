@@ -7,5 +7,7 @@ class CreateCoreLocations < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :core_locations, :address_id
   end
 end

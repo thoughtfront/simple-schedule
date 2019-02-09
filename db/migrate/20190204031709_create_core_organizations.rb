@@ -10,5 +10,10 @@ class CreateCoreOrganizations < ActiveRecord::Migration[5.2]
       t.string :status, null: false
       t.timestamps
     end
+
+    add_index :core_organizations, :primary_contact_id
+    add_index :core_organizations, :primary_email_id
+    add_index :core_organizations, :primary_address_id
+    add_index :core_organizations, :primary_phone_id
   end
 end
