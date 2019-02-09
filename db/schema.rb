@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_06_135933) do
+ActiveRecord::Schema.define(version: 2019_02_09_225734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2019_02_06_135933) do
   create_table "core_addresses_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "address_id"
     t.uuid "contact_id"
+    t.index ["address_id"], name: "index_core_addresses_contacts_on_address_id"
+    t.index ["contact_id"], name: "index_core_addresses_contacts_on_contact_id"
   end
 
   create_table "core_contacts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -53,11 +55,18 @@ ActiveRecord::Schema.define(version: 2019_02_06_135933) do
     t.index ["primary_phone_id"], name: "index_core_contacts_on_primary_phone_id"
   end
 
+  create_table "core_contacts_emails", force: :cascade do |t|
+    t.uuid "contact_id"
+    t.uuid "email_id"
+    t.index ["contact_id"], name: "index_core_contacts_emails_on_contact_id"
+    t.index ["email_id"], name: "index_core_contacts_emails_on_email_id"
+  end
+
   create_table "core_contacts_phones", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "phone_id"
     t.string "contact_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_core_contacts_phones_on_contact_id"
+    t.index ["phone_id"], name: "index_core_contacts_phones_on_phone_id"
   end
 
   create_table "core_emails", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -81,6 +90,8 @@ ActiveRecord::Schema.define(version: 2019_02_06_135933) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_category_id"], name: "index_core_events_on_event_category_id"
+    t.index ["location_id"], name: "index_core_events_on_location_id"
   end
 
   create_table "core_locations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -89,6 +100,7 @@ ActiveRecord::Schema.define(version: 2019_02_06_135933) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_core_locations_on_address_id"
   end
 
   create_table "core_organizations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -101,6 +113,10 @@ ActiveRecord::Schema.define(version: 2019_02_06_135933) do
     t.string "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["primary_address_id"], name: "index_core_organizations_on_primary_address_id"
+    t.index ["primary_contact_id"], name: "index_core_organizations_on_primary_contact_id"
+    t.index ["primary_email_id"], name: "index_core_organizations_on_primary_email_id"
+    t.index ["primary_phone_id"], name: "index_core_organizations_on_primary_phone_id"
   end
 
   create_table "core_phones", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -121,6 +137,7 @@ ActiveRecord::Schema.define(version: 2019_02_06_135933) do
     t.uuid "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_core_users_on_contact_id"
   end
 
 end

@@ -53,10 +53,12 @@ contact.addresses << address2
 # contact.emails << email1
 # contact.emails << emails2
 
-
 Core::User.create({
   email: email1.value,
   password: 'test123',
   confirmation_token: 'test123',
   contact_id: contact.id
 })
+
+org.primary_contact = contact
+org.save
