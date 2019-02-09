@@ -12,7 +12,7 @@
 class Core::Phone < ApplicationRecord
     
     #Associations
-    has_many :contacts
+    has_and_belongs_to_many :contacts
     has_one :organization
 
     #Validations
