@@ -14,6 +14,10 @@ class Auth::SessionsController < Clearance::SessionsController
     end
   end
 
+  def show
+    render :json => {user: current_user}
+  end
+
   def destroy
     sign_out
     render :json => {}, :status => 200
