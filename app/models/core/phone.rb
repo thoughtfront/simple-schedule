@@ -10,12 +10,11 @@
 #
 
 class Core::Phone < ApplicationRecord
-    
+
     #Associations
     has_and_belongs_to_many :contacts
-    has_one :organization
 
     #Validations
     validates :value, presence: :true
-    
+
 end

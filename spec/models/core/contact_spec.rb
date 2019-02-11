@@ -26,11 +26,27 @@ RSpec.describe Core::Contact, type: :model do
       it {is_expected.to have_one(:user)}
       it {is_expected.to have_and_belong_to_many(:addresses)}
       it {is_expected.to have_and_belong_to_many(:phones)}
-      # it {is_expected.to have_many(:emails)}
-      # it {is_expected.to belong_to(:organization)}
+      is (is_expected.to have_and_belong_to_many(:emails))
+      it {is_expected.to belong_to(:organization)}
       it {is_expected.to belong_to(:primary_email).class_name(Core::Email.name)}
       it {is_expected.to belong_to(:primary_phone).class_name(Core::Phone.name)}
       it {is_expected.to belong_to(:primary_address).class_name(Core::Address.name)}
+
+      it 'addresses assoication is working' do
+        contact = create(:core_contact);
+        contact.addresses = [create(:core_address), create(:core_address)]
+        contact.save
+        fromDb = Core::Contact.first()
+        expect(fromDb.addresses.count).to be(2);
+      end
+
+      it 'phones assoication is working' do
+        contact = create(:core_contact);
+        contact.phones = [create(:core_phone), create(:core_phone)]
+        contact.save
+        fromDb = Core::Contact.first()
+        expect(fromDb.phones.count).to be(2);
+      end
     end
 
     context 'validations' do

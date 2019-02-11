@@ -5,9 +5,11 @@ class CreateCoreEvents < ActiveRecord::Migration[5.2]
       t.uuid :event_category_id
       t.string :title
       t.text :description
-     
-      
+
       t.timestamps
     end
+
+    add_index :core_events, :location_id
+    add_index :core_events, :event_category_id
   end
 end

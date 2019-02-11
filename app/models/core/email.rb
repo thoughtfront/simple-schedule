@@ -12,8 +12,7 @@
 class Core::Email < ApplicationRecord
 
     #Associations
-    # has_one :user
-    # has_one :organization
+    has_and_belongs_to_many :contacts
 
     #Validations
     validates :value, presence: :true
