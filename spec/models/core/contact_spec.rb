@@ -26,7 +26,7 @@ RSpec.describe Core::Contact, type: :model do
       it {is_expected.to have_one(:user)}
       it {is_expected.to have_and_belong_to_many(:addresses)}
       it {is_expected.to have_and_belong_to_many(:phones)}
-      is (is_expected.to have_and_belong_to_many(:emails))
+      it {is_expected.to have_and_belong_to_many(:emails)}
       it {is_expected.to belong_to(:organization)}
       it {is_expected.to belong_to(:primary_email).class_name(Core::Email.name)}
       it {is_expected.to belong_to(:primary_phone).class_name(Core::Phone.name)}
