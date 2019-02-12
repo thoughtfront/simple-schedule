@@ -14,7 +14,7 @@ require 'rails_helper'
 RSpec.describe Core::Email, type: :model do
 
   context 'associations' do
-    it (is_expected.to have_and_belong_to_many(:contacts))
+    it {is_expected.to have_and_belong_to_many(:contacts)}
   end
 
   context 'validations' do

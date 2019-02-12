@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_225734) do
   end
 
   create_table "core_contacts_phones", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "phone_id"
-    t.string "contact_id"
+    t.uuid "phone_id"
+    t.uuid "contact_id"
     t.index ["contact_id"], name: "index_core_contacts_phones_on_contact_id"
     t.index ["phone_id"], name: "index_core_contacts_phones_on_phone_id"
   end
