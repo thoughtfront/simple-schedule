@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   get '/test' => 'test#index', as: 'test_index'
 
+  resources :event_categories
+
 end
