@@ -32,7 +32,7 @@ class Core::EventCategoriesController < ApplicationController
         if category.destroy
             render json: {status: 'SUCCESS', message: 'Destroyed event category', data:category}, status: :ok
         else
-            render json: {status: 'ERROR', message: 'Event category not destroyed', data:category.error}, status: :unprocessable_entity
+            render json: {status: 'ERROR', message: 'Event category not destroyed', data:category.errors}, status: :unprocessable_entity
         end
     end
 
