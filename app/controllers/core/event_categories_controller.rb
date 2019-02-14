@@ -1,4 +1,7 @@
 class Core::EventCategoriesController < ApplicationController
+
+    before_action :require_login
+
     def create
         category = EventCategory.new(event_category_params)
         if category.save
@@ -10,7 +13,7 @@ class Core::EventCategoriesController < ApplicationController
 
     def index
         categories = EventCategory.order('created_at DESC');
-        render json {status: 'SUCCESS', message: 'Loaded event categories', data:categories}, status: :ok
+        render json: {status: 'SUCCESS', message: 'Loaded event categories', data:categories}, status: :ok
     end
 
     def show
