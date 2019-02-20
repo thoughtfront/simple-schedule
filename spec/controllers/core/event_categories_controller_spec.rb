@@ -2,15 +2,20 @@ require 'rails_helper'
 require 'clearance/rspec'
 
 
-RSpec.describe Core::EventCategoriesController, type: :controller do
-    include Clearance::Controller    
+RSpec.describe Core::EventCategoriesController, type: :controller do   
 
     context 'create' do
         
         it 'succeeds' do
-           sign_in current_user
-           current = Core::EventCategory.count
-           puts(current)
+        #    current = Core::EventCategory.count
+        #    puts(current)
+        #    category = build(:core_event_category)
+        #    category.save
+        #    current = Core::EventCategory.count
+        #    puts(current)
+            sign_in
+           
+           
         end   
     end
 
