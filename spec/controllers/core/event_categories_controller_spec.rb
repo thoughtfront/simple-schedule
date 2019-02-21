@@ -67,8 +67,12 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             sign_in
             category = create(:core_event_category)
             get :show, params: {id: category.id}, format: :json
-            puts(JSON.parse(response.body))
-            puts("Category Id: " + category.id)
+            retreived_category = JSON(response.body)
+            data = retreived_category["data"]
+            id = data["id"]
+            expect(id).to eq(category.id)
+            puts("Expected ID to be retreived: " + category.id)
+            puts("Actual ID retreived:         " + id)
         end
 
         it 'errors when not signed in' do
@@ -86,12 +90,15 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
         it 'succeeds when signed in' do
             sign_in
             category = create(:core_event_category)
-            description_update = {description: "Updated Description"}
-            put :update, params: {id: category.id, description: description_update}, format: :json
-            updated_category = JSON.parse(response.body)
-            puts(updated_category)
-            # record description not being updated
-        #     expect(JSON(response.body.description)).to eq(description_update.description)
+            updated_description = "Updated Description"
+            put :update, params: {id: category.id, description: updated_description}, format: :json
+            updated_category = JSON(response.body)
+            data = updated_category["data"]
+            description = data["description"]
+            # puts(description)
+            expect(description).to eq(updated_description)
+            puts("Expected Description: " + updated_description)
+            puts("Actual Description:   " + description)
         end
 
         it 'errors when not signed in' do
@@ -100,7 +107,11 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
         end
 
         it 'prevents invalid updates' do
-
+            sign_in
+            category = create(:core_event_category)
+            update_params = {description: "Update"}
+            put :update, params: {id: category.id, description: update_params}, format: :json
+            expect(response).to have_http_status(424)
         end
     end
 
@@ -113,10 +124,13 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
         it 'succeeds when signed in' do
             sign_in
             category = create(:core_event_category)
-            puts("Record id being deleted: " + category.id)
             delete :destroy, params: {id:category.id}, format: :json
-            puts(response.body)
+            deleted_category = JSON(response.body)
+            data = deleted_category["data"]
+            id = data["id"]
             expect(response).to have_http_status(200)
+            puts("Expected ID to delete: " + category.id)
+            puts("Actual ID deleted:     " + id)
         end
 
         it 'errors when not signed in' do
