@@ -30,7 +30,7 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
     end
 
     context 'index' do
-
+        # Need to test that the data that we asked for was actually reveived as opposed to checking the the count was updated.
         it 'has route connected to controller' do
             expect("get" => "core/event_categories").to route_to(:controller => "core/event_categories", :action => "index")
         end
@@ -40,7 +40,9 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             create(:core_event_category)
             create(:core_event_category)
             get :index, format: :json
-            expect(Core::EventCategory.count).to eq(2)
+            category_index = JSON(response.body)
+            data = category_index["data"]
+            expect(data.size).to eq(2)
             expect(response).to have_http_status(200)
         end
 
@@ -111,7 +113,7 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             category = create(:core_event_category)
             update_params = {description: "Update"}
             put :update, params: {id: category.id, description: update_params}, format: :json
-            expect(response).to have_http_status(424)
+            expect(response).to have_http_status()
         end
     end
 
