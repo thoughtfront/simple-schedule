@@ -111,9 +111,8 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
         it 'prevents invalid updates' do
             sign_in
             category = create(:core_event_category)
-            update_params = {description: "Update"}
-            put :update, params: {id: category.id, description: update_params}, format: :json
-            expect(response).to have_http_status()
+            put :update, params: {id: category.id, name: nil}, format: :json
+            expect(response).to have_http_status(422)
         end
     end
 
