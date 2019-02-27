@@ -4,7 +4,8 @@ class Core::EventCategoriesController < ApplicationController
     def create
         category = Core::EventCategory.new(event_category_params)
         if category.save
-            render json: {status: 'SUCCESS', message: 'Saved event category', data:category}, status: :ok
+            response.headers['CATEGORY'] = category
+            render json: {data:category}, status: :ok
         else
             render json: {status: 'ERROR', message: 'Event category not saved', data:category.errors}, status: :unprocessable_entity
         end
