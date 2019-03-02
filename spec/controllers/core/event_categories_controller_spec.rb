@@ -14,7 +14,6 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             sign_in
             category = create(:core_event_category)
             post :create, params: {id: category.id, name: category.name, description: category.description}, format: :json
-            puts(response.get_header(CATEGORY))
             expect(response).to have_http_status(200)#Ok
         end   
 
