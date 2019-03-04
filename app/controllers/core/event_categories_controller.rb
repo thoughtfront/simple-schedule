@@ -1,5 +1,5 @@
 class Core::EventCategoriesController < ApplicationController
-    # before_action :require_login
+    before_action :require_login
     
     def create
         category = Core::EventCategory.new(event_category_params)
