@@ -48,6 +48,12 @@ contact = Core::Contact.create({
   primary_email_id: email1.id
 })
 
+location = Core::Location.create({
+  address_id: address2.id,
+  name: "test-name",
+  description: "test-description"
+})
+
 contact.addresses << address1
 contact.addresses << address2
 contact.emails << email1
