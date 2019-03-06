@@ -15,6 +15,6 @@ FactoryBot.define do
 
     address_id {create(:core_address).id}
     name { "location_#{Core::Location.count}" }
-    description {'description_#{Core::Address.count}'}
+    description {"description_#{Core::Address.count}"}
   end
 end
