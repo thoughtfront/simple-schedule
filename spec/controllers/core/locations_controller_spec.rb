@@ -4,7 +4,7 @@ RSpec.describe Core::LocationsController, type: :controller do
     context 'create' do
         it 'succeeds when signed in' do
             sign_in
-            location = create(:core_location)
+            location = build(:core_location)
             address = location.address
             puts(address.country)
             post :create, params: {

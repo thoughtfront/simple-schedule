@@ -11,7 +11,7 @@
 #
 
 FactoryBot.define do
-  factory :core_location, class: 'Core::Location' do
+  factory 'core/location', class: 'Core::Location' do
 
     address_id {create(:core_address).id}
     name { "location_#{Core::Location.count}" }

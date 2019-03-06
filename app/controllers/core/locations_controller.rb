@@ -33,7 +33,7 @@ class Core::LocationsController < ApplicationController
     private
 
         def location_params
-            params.permit(:name, :description, :address_id,)
+            params.permit(:name, :description)
         end
     
 end
