@@ -12,11 +12,11 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
         
         it 'succeeds when signed in' do
             sign_in
-            count = Core::Category.count
+            count = Core::EventCategory.count
             category = build(:core_event_category)
             post :create, params: {name: category.name, description: category.description}, format: :json
             expect(response).to have_http_status(200)#Ok
-            expect(Core::Category.count).to eq(count + 1) 
+            expect(Core::EventCategory.count).to eq(count + 1) 
         end   
 
         it 'errors when not signed in' do
@@ -93,12 +93,9 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             updated_description = "Updated Description"
             put :update, params: {id: category.id, description: updated_description}, format: :json
             updated_category = JSON(response.body)
-            data = updated_category["data"]
-            description = data["description"]
-            # puts(description)
+            description = updated_category['description']
             expect(description).to eq(updated_description)
-            puts("Expected Description: " + updated_description)
-            puts("Actual Description:   " + description)
+
         end
 
         it 'errors when not signed in' do
@@ -125,11 +122,9 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             category = create(:core_event_category)
             delete :destroy, params: {id:category.id}, format: :json
             deleted_category = JSON(response.body)
-            data = deleted_category["data"]
-            id = data["id"]
+            id = deleted_category["id"]
             expect(response).to have_http_status(200)
-            puts("Expected ID to delete: " + category.id)
-            puts("Actual ID deleted:     " + id)
+            expect(id).to eq(category.id)
         end
 
         it 'errors when not signed in' do
