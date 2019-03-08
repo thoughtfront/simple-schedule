@@ -11,10 +11,14 @@
 #
 
 FactoryBot.define do
-  factory 'core/location', class: 'Core::Location' do
+  factory :location, class: 'Core::Location' do
 
-    address_id {create(:core_address).id}
+    address_id {build(:address).id}
     name { "location_#{Core::Location.count}" }
     description {"description_#{Core::Address.count}"}
+
+    factory :location_without_address do
+        address_id {nil}
+    end
   end
 end

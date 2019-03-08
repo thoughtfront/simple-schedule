@@ -15,9 +15,26 @@ class Core::Location < ApplicationRecord
   #Associations
   has_many :events
   belongs_to :address , optional: true
-  accepts_nested_attributes_for :address, :allow_destroy => true, :update_only => true
-
+  
   #Validations
   validates :name, presence: :true
-  
+
+  def attributes 
+    {
+      'id' => self.id,
+      'name' => self.name,
+      'description' => self.description,
+      # 'location_address' => {
+      #   'address_one' => self.address.address_one,
+      #   'address_two' => self.address.address_two,
+      #   'city' => self.address.city,
+      #   'state_region' => self.address.state_region,
+      #   'country' => self.address.country,
+      #   'postal_code' => self.address.postal_code,
+      #   'label' => self.address.label 
+      # }
+    }
+  end
+
+
 end

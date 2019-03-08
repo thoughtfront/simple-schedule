@@ -4,28 +4,26 @@ RSpec.describe Core::LocationsController, type: :controller do
     context 'create' do
         it 'succeeds when signed in' do
             sign_in
-            location = build(:core_location)
-            address = location.address
-            puts(address.country)
+            location_count = Core::Location.count
+            location = build(:location_without_address)
+            address = build(:address)
             post :create, params: {
                 id: location.id,
-                address_id: address.id,
                 name: location.name, 
-                description: location.description
+                description: location.description,
+                location_address: {
+                    address_one: address.address_one,
+                    address_two: address.address_two,
+                    city: address.city,
+                    state_region: address.state_region,
+                    country: address.country,
+                    postal_code: address.postal_code,
+                    label: address.label
+                }    
             }
             puts(response.body)
             expect(response).to have_http_status(200)
+            expect(Core::Location.count).to eq(location_count + 1)
         end
     end
-    # context 'update' do
-    #     it 'succeeds when signed in' do
-    #         sign_in
-    #         location = create(:core_location)
-    #         address = location.address
-    #         updated_address = "Updated Address"
-    #         put :update, params: {id: location.id, name: 'New name', address_one: 'update'}, format: :json
-    #         puts(response.body)
-    #     end
-    # end
-
 end

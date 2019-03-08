@@ -2,13 +2,24 @@ class Core::LocationsController < ApplicationController
     # before_action :require_login
     
     def create
-        # Must create and address from params and pass the address_id into the location object
+        # Create address instance
+        address = Core::Address.new(location_address_params)
         location = Core::Location.new(location_params)
-        if location.save
-            render json: location, :include => {:address => {:except => :id}}, status: :ok
-        else
-            render json: location.errors, status: :unprocessable_entity
+        if address != nil  
+            if address.save
+                location.address_id = address.id   
+                if location.save
+                    render json: location, :include => {:address => {:except => :id}}, status: :ok
+                else
+                    render json: location.errors, status: :unprocessable_entity
+                    puts(location.errors)
+                end
+            else
+                render json: address.errors, status: :unprocessable_entity   
+            end
         end
+        
+        
     end
 
     def index
@@ -34,6 +45,11 @@ class Core::LocationsController < ApplicationController
 
         def location_params
             params.permit(:name, :description)
+        end
+
+        def location_address_params
+            params.require(:location_address).permit(:address_one, :city, :state_region,
+                :country, :postal_code)
         end
     
 end

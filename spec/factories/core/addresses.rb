@@ -15,7 +15,7 @@
 #
 
 FactoryBot.define do
-  factory :core_address, class: 'Core::Address' do
+  factory :address, class: 'Core::Address' do
 
     address_one {"#{Core::Address.count} Main Street"}
     city {"Cityville"}
