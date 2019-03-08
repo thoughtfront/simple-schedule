@@ -19,20 +19,22 @@ class Core::Location < ApplicationRecord
   #Validations
   validates :name, presence: :true
 
+  attribute :location_address
+
   def attributes 
     {
       'id' => self.id,
       'name' => self.name,
       'description' => self.description,
-      # 'location_address' => {
-      #   'address_one' => self.address.address_one,
-      #   'address_two' => self.address.address_two,
-      #   'city' => self.address.city,
-      #   'state_region' => self.address.state_region,
-      #   'country' => self.address.country,
-      #   'postal_code' => self.address.postal_code,
-      #   'label' => self.address.label 
-      # }
+      'location_address' => {
+        'address_one' => self.address.address_one,
+        'address_two' => self.address.address_two,
+        'city' => self.address.city,
+        'state_region' => self.address.state_region,
+        'country' => self.address.country,
+        'postal_code' => self.address.postal_code,
+        'label' => self.address.label 
+      }
     }
   end
 

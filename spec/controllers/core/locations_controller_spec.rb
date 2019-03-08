@@ -21,7 +21,6 @@ RSpec.describe Core::LocationsController, type: :controller do
                     label: address.label
                 }    
             }
-            puts(response.body)
             expect(response).to have_http_status(200)
             expect(Core::Location.count).to eq(location_count + 1)
         end
