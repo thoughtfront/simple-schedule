@@ -42,7 +42,7 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             create(:core_event_category)
             create(:core_event_category)
             get :index, format: :json
-            category_index = response.body
+            category_index = JSON.parse(response.body)
             expect(category_index.size).to eq(2)
             expect(response).to have_http_status(200)
         end
@@ -64,18 +64,15 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             category = create(:core_event_category)
             get :show, params: {id: category.id}
             expect(response).to have_http_status(200)
+            expect(JSON.parse(response.body)['id']).to eq(category.id)
         end
 
         it 'should match created category' do
             sign_in
             category = create(:core_event_category)
             get :show, params: {id: category.id}, format: :json
-            retreived_category = JSON(response.body)
-            data = retreived_category["data"]
-            id = data["id"]
-            expect(id).to eq(category.id)
-            puts("Expected ID to be retreived: " + category.id)
-            puts("Actual ID retreived:         " + id)
+            retreived_category = JSON.parse(response.body)
+            expect(retreived_category['id']).to eq(category.id)
         end
 
         it 'errors when not signed in' do
