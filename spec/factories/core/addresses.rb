@@ -24,4 +24,13 @@ FactoryBot.define do
     postal_code {"61234"}
 
   end
+
+  factory :empty_address, class: 'Core::Address' do
+    address_one {nil}
+    state_region {nil}
+    country {nil}
+    postal_code {nil}
+    label {nil}
+
+  end
 end
