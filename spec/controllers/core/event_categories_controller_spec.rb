@@ -12,9 +12,11 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
         
         it 'succeeds when signed in' do
             sign_in
-            category = create(:core_event_category)
-            post :create, params: {id: category.id, name: category.name, description: category.description}, format: :json
+            count = Core::Category.count
+            category = build(:core_event_category)
+            post :create, params: {name: category.name, description: category.description}, format: :json
             expect(response).to have_http_status(200)#Ok
+            expect(Core::Category.count).to eq(count + 1) 
         end   
 
         it 'errors when not signed in' do
