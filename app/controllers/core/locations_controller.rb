@@ -1,5 +1,5 @@
 class Core::LocationsController < ApplicationController
-    # before_action :require_login
+    before_action :require_login
     
     def create
         # Create address instance
@@ -18,8 +18,6 @@ class Core::LocationsController < ApplicationController
                 render json: address.errors, status: :unprocessable_entity   
             end
         end
-        
-        
     end
 
     def index
