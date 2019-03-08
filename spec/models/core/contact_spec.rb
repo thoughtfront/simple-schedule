@@ -34,7 +34,7 @@ RSpec.describe Core::Contact, type: :model do
 
       it 'addresses assoication is working' do
         contact = create(:core_contact);
-        contact.addresses = [create(:core_address), create(:core_address)]
+        contact.addresses = [create(:address), create(:address)]
         contact.save
         fromDb = Core::Contact.first()
         expect(fromDb.addresses.count).to be(2);

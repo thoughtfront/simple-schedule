@@ -21,14 +21,14 @@ RSpec.describe Core::Location, type: :model do
 
   context '.save' do
     it 'succeeds' do
-      test_location = build(:core_location)
+      test_location = build(:location)
       expect(test_location.save).to be(true)
     end
   end
 
   context 'validations' do
     it 'requires a name' do
-      test_location = build(:core_location, name: nil)
+      test_location = build(:location, name: nil)
       expect(test_location.valid?).to be(false)
     end
   end

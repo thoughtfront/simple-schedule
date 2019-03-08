@@ -24,27 +24,27 @@ RSpec.describe Core::Address, type: :model do
 
   context 'validations' do
     it 'is not valid without address_one' do
-      address = build(:core_address, address_one: nil)
+      address = build(:address, address_one: nil)
       expect(address.valid?).to be(false)
     end
 
     it 'is not valid without city' do
-      address = build(:core_address, city: nil)
+      address = build(:address, city: nil)
       expect(address.valid?).to be(false)
     end
 
     it 'is not valid without state_region' do
-      address = build(:core_address, state_region: nil)
+      address = build(:address, state_region: nil)
       expect(address.valid?).to be(false)
     end
 
     it 'is not valid without country' do
-      address = build(:core_address, country: nil)
+      address = build(:address, country: nil)
       expect(address.valid?).to be(false)
     end
 
     it 'is not valid without postal_code' do
-      address = build(:core_address, postal_code: nil)
+      address = build(:address, postal_code: nil)
       expect(address.valid?).to be(false)
     end
   end
