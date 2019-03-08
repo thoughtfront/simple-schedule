@@ -42,10 +42,8 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
             create(:core_event_category)
             create(:core_event_category)
             get :index, format: :json
-            category_index = JSON(response.body)
-            data = category_index["data"]
-            puts(response.body)
-            expect(data.size).to eq(2)
+            category_index = response.body
+            expect(category_index.size).to eq(2)
             expect(response).to have_http_status(200)
         end
 
