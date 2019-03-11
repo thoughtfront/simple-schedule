@@ -22,7 +22,7 @@ class Core::LocationsController < ApplicationController
 
     def index
         locations = Core::Location.order('created_at DESC')
-        render json: locations, :include => {:address => {:except => :id}}, status: :ok
+        render json: locations, status: :ok
     end
 
     def show

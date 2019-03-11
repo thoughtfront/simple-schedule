@@ -94,4 +94,36 @@ RSpec.describe Core::LocationsController, type: :controller do
             expect(response).to have_http_status(422)
         end
     end
+
+    context 'index' do
+
+        it 'has route connected to controller' do
+            expect("get" => "core/locations").to route_to(:controller => "core/locations", :action => "index")
+        end
+
+        it 'succeeds when signed in' do
+            sign_in
+            create(:location, :address => create(:address))
+            create(:location, :address => create(:address))
+            get :index, format: :json
+            location_index = JSON.parse(response.body)
+            expect(location_index.size).to eq(2)
+            expect(response).to have_http_status(200)
+        end
+
+        it 'errors when not signed in' do
+            create(:location, :address => create(:address))
+            create(:location, :address => create(:address))
+            get :index, format: :json
+            expect(response).to have_http_status(401)
+        end
+    end
+
+    context 'show' do
+        it 'has route connected to controller' do
+            expect("get" => "core/locations/1").to route_to(:controller => "core/locations", :action => "show", :id => "1")
+        end
+        
+    end
+
 end
