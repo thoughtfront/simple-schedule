@@ -26,6 +26,7 @@ RSpec.describe Core::LocationsController, type: :controller do
                     label: address.label
                 }    
             }, format: :json
+            puts(JSON.parse(response.body))
             expect(response).to have_http_status(200)
             expect(Core::Location.count).to eq(location_count + 1)
         end
@@ -123,7 +124,36 @@ RSpec.describe Core::LocationsController, type: :controller do
         it 'has route connected to controller' do
             expect("get" => "core/locations/1").to route_to(:controller => "core/locations", :action => "show", :id => "1")
         end
-        
+
+        it 'succeeds when signed in' do
+            sign_in
+            location = create(:location, :address => create(:address))
+            get :show, params: {id: location.id}, format: :json
+            expect(JSON.parse(response.body)['id']).to eq(location.id)
+            expect(response).to have_http_status(200)
+        end
+
+        it 'errors when not signed in' do
+            location = create(:location, :address => create(:address))
+            get :show, params: {id: location.id}, format: :json
+            expect(response).to have_http_status(401)
+        end
+    end
+
+    context 'update' do
+        it 'has route connected to controller' do
+            expect("put" => "core/locations/1").to route_to(:controller => "core/locations", :action => "update", :id => "1")
+        end
+
+        it 'succeeds when signed in' do
+            sign_in
+            location = create(:location)
+            address = create(:address)
+            location.address = address
+            update_name = 'updated name'
+            put :update, params: {id: location.id, name: update_name}, format: :json
+            puts(JSON.parse(response.body))
+        end
     end
 
 end
