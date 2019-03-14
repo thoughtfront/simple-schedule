@@ -26,6 +26,5 @@ class Core::Address < ApplicationRecord
     validates :state_region, presence: :true
     validates :country, presence: :true
     validates :postal_code, presence: :true
-
   end
 

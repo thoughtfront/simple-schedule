@@ -20,8 +20,8 @@ class Core::LocationsController < ApplicationController
     end
 
     def index
-        locations = Core::Location.order('created_at DESC')
-        render json: locations, :include => [:address], status: :ok
+        locations = Core::Location.order('created_at DESC').includes(:address).map { |location| location.attributes }
+        render json: locations, status: :ok
     end
 
     def show
@@ -30,11 +30,22 @@ class Core::LocationsController < ApplicationController
     end
 
     def update
-        # Use location's address_id to update associated address along with updating location
-        location = Core::Location.find(params[:id])
-        if location.update_attributes(location_params)
-            render json: location, status: :ok
-        end  
+        location = Core::Location.includes(:address).find(params[:id])
+        if location.address_id == nil
+            if location.update(location_params)
+                render json: location, status: :ok
+            else
+                render json: location.errors
+            end 
+        else
+            if location.address.update(location_address_params)
+                if location.update(location_params)
+                    render json: location, status: :ok
+                end 
+            else
+                render json: location.address.errors
+            end
+        end   
     end
 
     private
@@ -43,6 +54,18 @@ class Core::LocationsController < ApplicationController
             params.permit(
                 :name, 
                 :description, 
-                location_address: [:address_one, :address_two, :city, :state_region, :country, :postal_code, :label])
+                location_address: [:id, :address_one, :address_two, :city, :state_region, :country, :postal_code, :label])
+        end
+
+        def location_address_params
+            params.permit(
+                :address_one, 
+                :address_two, 
+                :city, 
+                :state_region, 
+                :country, 
+                :postal_code, 
+                :label
+            )
         end
 end

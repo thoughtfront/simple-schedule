@@ -38,6 +38,4 @@ class Core::Location < ApplicationRecord
       # }
     }
   end
-
-
 end
