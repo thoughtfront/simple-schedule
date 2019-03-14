@@ -48,6 +48,27 @@ class Core::LocationsController < ApplicationController
         end   
     end
 
+    def destroy
+        location = Core::Location.includes(:address).find(params:[id])
+        if location.address_id == nil
+            if location.destroy
+                render json: location, status: :ok
+            else
+                render json: location.errors, status: :unprocessable_entity
+            end
+        else
+            if location.address.destroy
+                if location.destroy
+                    render json: location, status: :ok
+                else 
+                    render json: location.errors, status: :unprocessable_entity
+                end
+            else
+                render json: location.address.errors
+            end
+        end
+    end
+
     private
 
         def location_params
