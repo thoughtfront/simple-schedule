@@ -49,7 +49,7 @@ class Core::LocationsController < ApplicationController
     end
 
     def destroy
-        location = Core::Location.includes(:address).find(params:[id])
+        location = Core::Location.includes(:address).find(params[:id])
         if location.address_id == nil
             if location.destroy
                 render json: location, status: :ok

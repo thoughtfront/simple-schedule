@@ -167,7 +167,27 @@ RSpec.describe Core::LocationsController, type: :controller do
             put :update, params: update_params, format: :json
             expect(count).to eq(Core::Address.count)
             expect(response).to have_http_status(200)
-            puts(JSON.parse(response.body))
+        end
+    end
+
+    context 'destroy' do
+        it 'has route connected to controller' do
+            expect("delete" => "core/locations/1").to route_to(:controller => "core/locations", :action => "destroy", :id => "1")
+        end
+
+        it 'succeeds when signed in' do
+            sign_in
+            location = create(:location, :address => create(:address))
+            address_count = Core::Address.count
+            location_count = Core::Location.count
+            puts("Address Count: #{address_count}")
+            puts("Location Count: #{location_count}")
+            delete :destroy, params: {id: location.id}, format: :json
+            expect(location_count - 1).to eq(Core::Location.count)
+            expect(address_count - 1).to eq(Core::Address.count)
+            expect(response).to have_http_status(200)
+            puts(Core::Address.count)
+            puts(Core::Location.count)
         end
     end
 
