@@ -180,14 +180,18 @@ RSpec.describe Core::LocationsController, type: :controller do
             location = create(:location, :address => create(:address))
             address_count = Core::Address.count
             location_count = Core::Location.count
-            puts("Address Count: #{address_count}")
-            puts("Location Count: #{location_count}")
             delete :destroy, params: {id: location.id}, format: :json
             expect(location_count - 1).to eq(Core::Location.count)
             expect(address_count - 1).to eq(Core::Address.count)
             expect(response).to have_http_status(200)
-            puts(Core::Address.count)
-            puts(Core::Location.count)
+        end
+
+        it 'fails when not signed in' do
+            location = create(:location, :address => create(:address))
+            address_count = Core::Address.count
+            location_count = Core::Location.count
+            delete :destroy, params: {id: location.id}, format: :json
+            expect(response).to have_http_status(401)
         end
     end
 
