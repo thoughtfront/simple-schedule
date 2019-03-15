@@ -16,7 +16,10 @@
 #
 
 FactoryBot.define do
-  factory :core_user, class: 'Core::User' do
-        
+  factory 'core/user', class: 'Core::User' do
+      email {create(:core_email).value}
+      password {'test123'}
+      confirmation_token {'test123'}
+      contact {create(:core_contact)}
   end
 end

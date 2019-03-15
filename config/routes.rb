@@ -10,4 +10,9 @@ Rails.application.routes.draw do
 
   get '/test' => 'test#index', as: 'test_index'
 
+  namespace :core do
+    resources :event_categories, only: [:create, :index, :show, :update, :destroy]
+  end
+ 
+
 end
