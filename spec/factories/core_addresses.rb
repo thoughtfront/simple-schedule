@@ -18,10 +18,22 @@ FactoryBot.define do
   factory :core_address, class: 'Core::Address' do
 
     address_one {"#{Core::Address.count} Main Street"}
+    address_two {"#{Core::Address.count} Main Street"}
     city {"Cityville"}
     state_region {"Illinois"}
     country {"United States"}
     postal_code {"61234"}
+
+  end
+
+  factory :empty_address, class: 'Core::Address' do
+    address_one {nil}
+    address_two {nil}
+    city {nil}
+    state_region {nil}
+    country {nil}
+    postal_code {nil}
+    label {nil}
 
   end
 end

@@ -12,10 +12,16 @@
 #
 
 FactoryBot.define do
-  factory :core_event, class: 'Core::Event' do
+  factory :event, class: 'Core::Event' do
 
     title {'test-title'}
     description {'test description'}
+    location_id {create(:core_location).id}
+    event_category_id{create(:core_event_category).id}
 
+    factory :empty_event, class: 'Core::Event' do
+      location_id {nil}
+      event_category_id {nil}
+    end
   end
 end
