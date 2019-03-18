@@ -7,7 +7,7 @@ RSpec.describe Core::EventCategoriesController, type: :controller do
     context 'create' do
 
         it 'has route connected to controller' do
-            expect(:post => "/core/event_categories").to route_to(:controller => "core/event_categories", :action => "create")
+            expect(:post => "core/event_categories").to route_to(:controller => "core/event_categories", :action => "create")
         end
         
         it 'succeeds when signed in' do
