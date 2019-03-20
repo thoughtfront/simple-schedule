@@ -21,6 +21,12 @@ class Core::Location < ApplicationRecord
 
   attribute :location_address
 
+  before_create :create_address
+
+  def create_address
+      self.address = params['location_address']
+  end
+
   def attributes 
     {
       'id'=> self.id,
@@ -37,5 +43,10 @@ class Core::Location < ApplicationRecord
       #   'label' => self.address.label 
       # }
     }
+  end
+
+  def create_address
+    address = Core::Address.new(location_address)
+    puts(address.attributes)
   end
 end

@@ -3,20 +3,20 @@ class Core::LocationsController < ApplicationController
     
     def create
         # Create address instance
-        address = Core::Address.new(location_params["location_address"])
+        # address = Core::Address.new(location_params["location_address"])
         location = Core::Location.new(location_params)
-        if address != nil  
-            if address.save
-                location.address_id = address.id   
+        # if address != nil  
+        #     if address.save
+        #         location.address_id = address.id   
                 if location.save
                     render json: location, status: :ok
                 else
                     render json: location.errors, status: :unprocessable_entity
                 end
-            else
-                render json: address.errors, status: :unprocessable_entity   
-            end
-        end
+        #     else
+        #         render json: address.errors, status: :unprocessable_entity   
+        #     end
+        # end
     end
 
     def index
