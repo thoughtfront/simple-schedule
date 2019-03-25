@@ -3,6 +3,7 @@ class Core::EventsController < ApplicationController
 
     def create
         event = Core::Event.new(event_params)
+
         # if location != nil
         #     if location.save
         #         event.location_id = location.id 
@@ -48,7 +49,7 @@ class Core::EventsController < ApplicationController
                         :label
                     ]
                 ],
-                event_cateogry: [
+                event_event_category: [
                     :name,
                     :description
                 ]
@@ -66,7 +67,7 @@ class Core::EventsController < ApplicationController
 
         def event_category_params
             params.permit(
-                event_category: [
+                event_event_category: [
                     :name,
                     :description
                 ]
