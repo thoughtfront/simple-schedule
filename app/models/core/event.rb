@@ -26,7 +26,7 @@ class Core::Event < ApplicationRecord
   attribute :location_address
 
   #Callbacks
-  before_create :create_location
+  # before_create :create_location
   before_create :create_event_category
 
   private
@@ -37,7 +37,6 @@ class Core::Event < ApplicationRecord
         if location.save
           self.location_id = location.id
         else
-          location_errors = location.location_errors
           self.errors.add("Location error", messages: location.errors.messages)
           throw :abort
         end
@@ -48,7 +47,19 @@ class Core::Event < ApplicationRecord
     end
 
     def create_event_category
-
+      event_category = nil
+      if self.event_category != nil
+        event_category = Core::EventCategory.new(self.event_category)
+        if event_category.save
+          self.event_category_id = evnet_category.id
+        else
+          self.errors.add("Event Category error", messages: event_category.errors.messages)
+          throw :abort
+        end
+      else
+        self.errors.add("Event Category error", mesages "Event Category is empty")
+        throw :abort
+      end
     end
   
 end
