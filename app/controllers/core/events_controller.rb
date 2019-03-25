@@ -2,27 +2,24 @@ class Core::EventsController < ApplicationController
     before_action :require_login
 
     def create
-        location = Core::location.new(event_params["event_location"])
-        event_category = Core::EventCategory.new(event_params["event_category"])
         event = Core::Event.new(event_params)
+        # if location != nil
+        #     if location.save
+        #         event.location_id = location.id 
+        #     else
+        #         render json: location.errors, status: :unprocessable_entity
+        #         return
+        #     end 
+        # end
 
-        if location != nil
-            if location.save
-                event.location_id = location.id 
-            else
-                render json: location.errors, status: :unprocessable_entity
-                return
-            end 
-        end
-
-        if event_category != nil
-            if event_category.save
-                event.event_category_id = event_category.id
-            else
-                render json: event_category.errors, status: :unprocessable_entity
-                return
-            end
-        end
+        # if event_category != nil
+        #     if event_category.save
+        #         event.event_category_id = event_category.id
+        #     else
+        #         render json: event_category.errors, status: :unprocessable_entity
+        #         return
+        #     end
+        # end
 
         if event.save
             render json: event, status: :ok
