@@ -19,8 +19,10 @@ class Core::Location < ApplicationRecord
   #Validations
   validates :name, presence: :true
 
+  #Attribures
   attribute :location_address
-
+  
+  #Callbacks
   before_create :create_address
 
   def attributes 
@@ -29,15 +31,6 @@ class Core::Location < ApplicationRecord
       'name' => self.name,
       'description' => self.description,
       'location_address' => self.address
-      # 'location_address' => {
-      #   'address_one' => self.address.address_one,
-      #   'address_two' => self.address.address_two,
-      #   'city' => self.address.city,
-      #   'state_region' => self.address.state_region,
-      #   'country' => self.address.country,
-      #   'postal_code' => self.address.postal_code,
-      #   'label' => self.address.label 
-      # }
     }
   end
 
