@@ -19,5 +19,22 @@ class Core::Event < ApplicationRecord
 
   #Validations
   validates :title, presence: :true
+
+  #Attributes 
+  attribute :event_location
+  attribute :event_category
+
+  #Callbacks
+  before_create :create_location
+  before_create :create_event_category
+
+  private
+    def create_location
+
+    end
+
+    def create_event_category
+      
+    end
   
 end
