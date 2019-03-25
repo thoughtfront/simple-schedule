@@ -21,7 +21,7 @@ RSpec.describe Core::Location, type: :model do
 
   context '.save' do
     it 'succeeds' do
-      test_location = build(:location)
+      test_location = build(:location_with_location_address)
       expect(test_location.save).to be(true)
     end
   end
