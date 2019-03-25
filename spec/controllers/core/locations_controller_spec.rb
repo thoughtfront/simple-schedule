@@ -149,7 +149,6 @@ RSpec.describe Core::LocationsController, type: :controller do
             location = create(:location_with_location_address)
             update_name = 'updated name'
             put :update, params: {id: location.id, name: update_name}, format: :json
-            puts(JSON.parse(response.body))
             expect(JSON.parse(response.body)["name"]).to eq(update_name)
             expect(response).to have_http_status(200)
         end
@@ -168,7 +167,6 @@ RSpec.describe Core::LocationsController, type: :controller do
                 label: location.address.label
                 }}
             put :update, params: update_params, format: :json
-            puts(JSON.parse(response.body))
             expect(count).to eq(Core::Address.count)
             expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
             expect(response).to have_http_status(200)
