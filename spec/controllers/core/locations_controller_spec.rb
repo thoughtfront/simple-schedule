@@ -103,17 +103,17 @@ RSpec.describe Core::LocationsController, type: :controller do
 
         it 'succeeds when signed in' do
             sign_in
-            create(:location)
-            create(:location)
+            create(:location_with_location_address)
+            create(:location_with_location_address)
             get :index, format: :json
             location_index = JSON.parse(response.body)
             expect(location_index.size).to eq(2)
-            expect(response).to have_http_status(200)
+            expect(response).to have_http_status(200) 
         end
 
         it 'errors when not signed in' do
-            create(:location)
-            create(:location)
+            create(:location_with_location_address)
+            create(:location_with_location_address)
             get :index, format: :json
             expect(response).to have_http_status(401)
         end
@@ -126,14 +126,14 @@ RSpec.describe Core::LocationsController, type: :controller do
 
         it 'succeeds when signed in' do
             sign_in
-            location = create(:location)
+            location = create(:location_with_location_address)
             get :show, params: {id: location.id}, format: :json
             expect(JSON.parse(response.body)['id']).to eq(location.id)
             expect(response).to have_http_status(200)
         end
 
         it 'errors when not signed in' do
-            location = create(:location, :address => create(:address))
+            location = create(:location_with_location_address)
             get :show, params: {id: location.id}, format: :json
             expect(response).to have_http_status(401)
         end
@@ -146,14 +146,17 @@ RSpec.describe Core::LocationsController, type: :controller do
 
         it 'succeeds when signed in' do
             sign_in
-            location = create(:location, :address => create(:address))
+            location = create(:location_with_location_address)
             update_name = 'updated name'
             put :update, params: {id: location.id, name: update_name}, format: :json
+            puts(JSON.parse(response.body))
+            expect(JSON.parse(response.body)["name"]).to eq(update_name)
+            expect(response).to have_http_status(200)
         end
 
         it 'succeeds when address is updated' do
             sign_in
-            location = create(:location, :address => create(:address))
+            location = create(:location_with_location_address)
             count = Core::Address.count
             update_params = {id: location.id, :location_address => {
                 address_one: 'updated address',
@@ -165,7 +168,9 @@ RSpec.describe Core::LocationsController, type: :controller do
                 label: location.address.label
                 }}
             put :update, params: update_params, format: :json
+            puts(JSON.parse(response.body))
             expect(count).to eq(Core::Address.count)
+            expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
             expect(response).to have_http_status(200)
         end
     end
@@ -177,7 +182,7 @@ RSpec.describe Core::LocationsController, type: :controller do
 
         it 'succeeds when signed in' do
             sign_in
-            location = create(:location, :address => create(:address))
+            location = create(:location_with_location_address)
             address_count = Core::Address.count
             location_count = Core::Location.count
             delete :destroy, params: {id: location.id}, format: :json
@@ -187,7 +192,7 @@ RSpec.describe Core::LocationsController, type: :controller do
         end
 
         it 'fails when not signed in' do
-            location = create(:location, :address => create(:address))
+            location = create(:location_with_location_address)
             address_count = Core::Address.count
             location_count = Core::Location.count
             delete :destroy, params: {id: location.id}, format: :json

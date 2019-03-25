@@ -23,10 +23,6 @@ class Core::Location < ApplicationRecord
 
   before_create :create_address
 
-  def create_address
-      self.address = params['location_address']
-  end
-
   def attributes 
     {
       'id'=> self.id,
@@ -45,8 +41,22 @@ class Core::Location < ApplicationRecord
     }
   end
 
-  def create_address
-    address = Core::Address.new(location_address)
-    puts(address.attributes)
-  end
+  private 
+
+    def create_address
+      address = nil
+      if self.location_address != nil
+        address = Core::Address.new(self.location_address)
+        if address.save
+          self.address_id = address.id
+        else
+          address_errors = address.errors
+          self.errors.add("address error", messages: address.errors.messages)
+          throw :abort
+        end
+      else
+        self.errors.add("address error", messages: "address is empty")
+        throw :abort
+      end
+    end
 end

@@ -15,10 +15,23 @@ FactoryBot.define do
 
     name { "location_#{Core::Location.count}" }
     description {"description_#{Core::Address.count}"}
-    address_id {create(:address).id}
 
     factory :location_without_address do
         address_id {nil}
+    end
+
+    factory :location_with_location_address do 
+       location_address {
+         {
+            address_one: 'address_one',
+            address_two: 'address_two',
+            city: 'DeKalb',
+            state_region: 'Illinois',
+            country: 'US',
+            postal_code: '69876',
+            label: 'label'
+         }
+       }
     end
   end
 end
