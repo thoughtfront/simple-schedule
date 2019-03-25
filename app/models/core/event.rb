@@ -34,7 +34,8 @@ class Core::Event < ApplicationRecord
       "id" => self.id,
       "title" => self.title,
       "description" => self.description,
-      "event_category" => self.event_category
+      "event_location" => self.location,
+      "event_category" => self.event_event_category
     }
   end
 
