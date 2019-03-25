@@ -39,7 +39,17 @@ class Core::EventsController < ApplicationController
                 :description,
                 event_location: [
                     :name,
-                    :description
+                    :description,
+                    location_address: [
+                        :id,
+                        :address_one,
+                        :address_two,
+                        :city,
+                        :state_region,
+                        :country,
+                        :postal_code,
+                        :label
+                    ]
                 ],
                 event_cateogry: [
                     :name,
