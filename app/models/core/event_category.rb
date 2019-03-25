@@ -17,4 +17,12 @@ class Core::EventCategory < ApplicationRecord
   #Validations
   validates :name, presence: :true
 
+  def attributes
+    {
+      "id" => self.id,
+      "description" => self.description
+    }
+  
+  end
+
 end
