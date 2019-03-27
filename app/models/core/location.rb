@@ -43,12 +43,11 @@ class Core::Location < ApplicationRecord
         if address.save
           self.address_id = address.id
         else
-          address_errors = address.errors
-          self.errors.add("address error", messages: address.errors.messages)
+          self.errors.add(:address_error, messages: address.errors.messages)
           throw :abort
         end
       else
-        self.errors.add("address error", messages: "address is empty")
+        self.errors.add(:location_error, messages: "location_address is empty")
         throw :abort
       end
     end
