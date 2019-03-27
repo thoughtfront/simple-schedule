@@ -22,16 +22,15 @@ RSpec.describe Core::Event, type: :model do
 
   context '.save' do
     it 'succeeds' do
-      test_event = build(:core_event)
+      test_event = build(:event_with_event_category)
       expect(test_event.save).to be(true)
     end
   end
   
   context 'validations' do
     it 'requires a title' do
-      test_event = build(:core_event, title: nil)
+      test_event = build(:event, title: nil)
       expect(test_event.valid?).to be(false)
     end
   end
-  
 end
