@@ -62,6 +62,7 @@ RSpec.describe Core::LocationsController, type: :controller do
                 location_address: {}    
             }, format: :json
             expect(response).to have_http_status(422)
+            expect(JSON.parse(response.body).include?("location_error")).to eq(true)
             expect(Core::Location.count).to eq(location_count)
         end
 
@@ -85,6 +86,7 @@ RSpec.describe Core::LocationsController, type: :controller do
                 }    
             }, format: :json
             expect(response).to have_http_status(422)
+            expect(JSON.parse(response.body).include?("address_error")).to eq(true)
             expect(Core::Location.count).to eq(location_count)
         end
 
