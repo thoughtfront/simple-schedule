@@ -3,25 +3,7 @@ class Core::EventsController < ApplicationController
 
     def create
         event = Core::Event.new(event_params)
-
-        # if location != nil
-        #     if location.save
-        #         event.location_id = location.id 
-        #     else
-        #         render json: location.errors, status: :unprocessable_entity
-        #         return
-        #     end 
-        # end
-
-        # if event_category != nil
-        #     if event_category.save
-        #         event.event_category_id = event_category.id
-        #     else
-        #         render json: event_category.errors, status: :unprocessable_entity
-        #         return
-        #     end
-        # end
-
+        
         if event.save
             render json: event, status: :ok
         else
