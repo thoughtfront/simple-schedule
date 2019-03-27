@@ -14,12 +14,19 @@
 FactoryBot.define do
   factory :event, class: 'Core::Event' do
 
-    title {'test-title'}
-    description {'test description'}
-    location_id {create(:core_location).id}
-    event_category_id{create(:core_event_category).id}
-
-    factory :empty_event, class: 'Core::Event' do
+    title {'test_title'}
+    description {'test_description'}
+   
+    factory :event_with_event_category do
+      event_event_category {
+        {
+          name: 'event_category_name',
+          description: 'event_category_description'
+        }
+      }
+    end
+    
+    factory :empty_event do
       location_id {nil}
       event_category_id {nil}
     end
