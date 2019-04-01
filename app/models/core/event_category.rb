@@ -19,7 +19,7 @@ class Core::EventCategory < ApplicationRecord
 
   def attributes
     {
-      "id" => self.id,
+      "name" => self.name,
       "description" => self.description
     }
   
