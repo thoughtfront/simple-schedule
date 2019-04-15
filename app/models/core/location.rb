@@ -24,6 +24,7 @@ class Core::Location < ApplicationRecord
   
   #Callbacks
   before_create :create_address
+  before_update :update_address
 
   def attributes 
     {
@@ -50,5 +51,18 @@ class Core::Location < ApplicationRecord
         self.errors.add(:location_error, messages: "location_address is empty")
         throw :abort
       end
+    end
+
+    def update_address
+
+      if self.address_id == nil
+        self.create_address
+      else
+        puts(location_address["address_one"])
+
+        puts(self.address.address_one)
+      end
+      
+      
     end
 end
