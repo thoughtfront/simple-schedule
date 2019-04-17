@@ -58,9 +58,9 @@ class Core::Location < ApplicationRecord
       if self.address_id == nil
         self.create_address
       else
-        puts(location_address["address_one"])
-
-        puts(self.address.address_one)
+        location_address.length
+        # puts(location_address.inspect)
+        # self.address.update(address_one: location_address["address_one"])
       end
       
       
