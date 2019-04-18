@@ -54,15 +54,11 @@ class Core::Location < ApplicationRecord
     end
 
     def update_address
-
-      if self.address_id == nil
-        self.create_address
+      if location_address != nil
+        self.address.assign_attributes(location_address)
+        self.address.save
       else
-        location_address.length
-        # puts(location_address.inspect)
-        # self.address.update(address_one: location_address["address_one"])
+        self.errors.add(:location_error, messages: "location_address is empty")
       end
-      
-      
     end
 end

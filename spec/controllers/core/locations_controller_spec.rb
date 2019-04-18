@@ -167,7 +167,8 @@ RSpec.describe Core::LocationsController, type: :controller do
                 country: location.address.country,
                 postal_code: location.address.postal_code,
                 label: location.address.label
-                }}
+                }
+            }
             put :update, params: update_params, format: :json
             expect(count).to eq(Core::Address.count)
             expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")

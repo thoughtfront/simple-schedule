@@ -22,21 +22,11 @@ class Core::LocationsController < ApplicationController
 
     def update
         location = Core::Location.includes(:address).find(params[:id])
-        if location.address_id == nil
-            if location.update(location_params)
-                render json: location, status: :ok
-            else
-                render json: location.errors
-            end 
+        if location.update(location_params)
+            render json: location, status: :ok
         else
-            if location.address.update(location_address_params)
-                if location.update(location_params)
-                    render json: location, status: :ok
-                end 
-            else
-                render json: location.address.errors
-            end
-        end   
+            render json: location.errors
+        end  
     end
 
     def destroy
