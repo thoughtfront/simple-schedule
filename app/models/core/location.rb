@@ -29,6 +29,7 @@ class Core::Location < ApplicationRecord
   def attributes 
     {
       'id'=> self.id,
+      'address_id' => self.address_id,
       'name' => self.name,
       'description' => self.description,
       'location_address' => self.address
@@ -55,10 +56,19 @@ class Core::Location < ApplicationRecord
 
     def update_address
       if location_address != nil
-        self.address.assign_attributes(location_address)
-        self.address.save
+        if Core::Address.exists?(location_address)
+          puts(Core::Address.exists?(location_address))
+          address = Core::Address.find(location_address)
+          self.address_id = address.id
+          self.save
+        else
+          create_address
+        end
+        # self.address.assign_attributes(location_address)
+        # self.address.save
       else
         self.errors.add(:location_error, messages: "location_address is empty")
       end
     end
+
 end

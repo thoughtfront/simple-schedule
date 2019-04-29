@@ -170,8 +170,49 @@ RSpec.describe Core::LocationsController, type: :controller do
                 }
             }
             put :update, params: update_params, format: :json
+            expect(count + 1).to eq(Core::Address.count)
+            expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
+            expect(response).to have_http_status(200)
+        end
+
+        it 'does not create new address if found' do
+            sign_in
+            location = create(:location_with_location_address)
+
+            update_params = {id: location.id, :location_address => {
+                address_one: 'updated address',
+                address_two: location.address.address_two,
+                city: location.address.city,
+                state_region: location.address.state_region,
+                country: location.address.country,
+                postal_code: location.address.postal_code,
+                label: location.address.label
+                }
+            }
+
+            newAddress = create(:address)
+            count = Core::Address.count
+            address = Core::Address.new(location.address.attributes)
+            
+            
+            put :update, params: update_params, format: :json
             expect(count).to eq(Core::Address.count)
             expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
+            expect(address.id).to eq(JSON.parse(response.body)["address_id"])
+            expect(response).to have_http_status(200)
+        end
+        
+        it 'creates new address if not found' do 
+            sign_in
+            location = create(:location_with_location_address)
+            address = create(:address)
+            count = Core::Address.count
+
+            update_params = {id: location.id, :location_address => address.attributes}
+            put :update, params: update_params, format: :json
+            expect(count + 1).to eq(Core::Address.count)
+            expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
+            expect(address.id).not_to eq(JSON.parse(response.body)["address_id"])
             expect(response).to have_http_status(200)
         end
     end
