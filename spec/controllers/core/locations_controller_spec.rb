@@ -175,45 +175,67 @@ RSpec.describe Core::LocationsController, type: :controller do
             expect(response).to have_http_status(200)
         end
 
-        it 'does not create new address if found' do
-            sign_in
-            location = create(:location_with_location_address)
-
-            update_params = {id: location.id, :location_address => {
-                address_one: 'updated address',
-                address_two: location.address.address_two,
-                city: location.address.city,
-                state_region: location.address.state_region,
-                country: location.address.country,
-                postal_code: location.address.postal_code,
-                label: location.address.label
-                }
-            }
-
-            newAddress = create(:address)
-            count = Core::Address.count
-            address = Core::Address.new(location.address.attributes)
-            
-            
-            put :update, params: update_params, format: :json
-            expect(count).to eq(Core::Address.count)
-            expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
-            expect(address.id).to eq(JSON.parse(response.body)["address_id"])
-            expect(response).to have_http_status(200)
-        end
-        
-        it 'creates new address if not found' do 
+        it 'updates location with new address' do
             sign_in
             location = create(:location_with_location_address)
             address = create(:address)
             count = Core::Address.count
 
-            update_params = {id: location.id, :location_address => address.attributes}
+            update_params = {id: location.id, :location_address => {
+                id: address.id
+                }
+            }
             put :update, params: update_params, format: :json
-            expect(count + 1).to eq(Core::Address.count)
-            expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq("updated address")
-            expect(address.id).not_to eq(JSON.parse(response.body)["address_id"])
+            expect(count).to eq(Core::Address.count)
+            expect(address.id).to eq(JSON.parse(response.body)["address_id"])
             expect(response).to have_http_status(200)
+        end
+
+        it 'updates changed address with new params' do
+            sign_in
+            location = create(:location_with_location_address)
+            address = create(:address)
+            count = Core::Address.count
+
+            update_params = {id: location.id, :location_address => {
+                id: address.id,
+                address_one: 'updated address',
+                address_two: address.address_two,
+                city: address.city,
+                state_region: address.state_region,
+                country: address.country,
+                postal_code: address.postal_code,
+                label: address.label
+                }
+            }
+            put :update, params: update_params, format: :json
+            expect(count).to eq(Core::Address.count)
+            expect(address.id).to eq(JSON.parse(response.body)["address_id"])
+            expect(JSON.parse(response.body)["location_address"]["address_one"]).to eq('updated address')
+            expect(response).to have_http_status(200)      
+        end
+        
+        it 'creates new address if address id not passed' do 
+            sign_in
+            location = create(:location_with_location_address)
+            address = create(:address)
+            count = Core::Address.count
+
+            update_params = {id: location.id, :location_address => {
+                address_one: 'updated address',
+                address_two: address.address_two,
+                city: address.city,
+                state_region: address.state_region,
+                country: address.country,
+                postal_code: address.postal_code,
+                label: address.label
+            }}
+
+            put :update, params: update_params, format: :json
+            expect(Core::Address.count).to eq(count + 1)
+            expect(JSON.parse(response.body)['address_id']).not_to eq(address.id)
+            expect(response).to have_http_status(200)
+            
         end
     end
 
