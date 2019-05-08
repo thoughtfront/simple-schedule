@@ -55,9 +55,10 @@ class Core::Location < ApplicationRecord
     end
 
     def update_address
-
-      if location_address{"id"} != nil
-        if Core::Address.exists?(location_address["id"])
+      if location_address.nil?
+        return
+      else
+        if !location_address["id"].nil? && Core::Address.exists?(location_address["id"])
           address = Core::Address.find(location_address["id"])
           self.address_id = address.id
           self.address.update(location_address)
@@ -65,10 +66,7 @@ class Core::Location < ApplicationRecord
           if location_address != nil
             create_address
           end
-        end
-
-      else
-        self.errors.add(:location_error, messages: "location_address is empty")
+        end  
       end
-    end
+    end    
 end
