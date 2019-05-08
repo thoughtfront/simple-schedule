@@ -57,23 +57,23 @@ contact = Core::Contact.create({
   primary_email_id: email1.id
 })
 
-# location1 = Core::Location.create({
-#   address_id: address1.id,
-#   name: "test_name1",
-#   description: "test_description1"
-# })
+location1 = Core::Location.create({
+  address_id: address1.id,
+  name: "test_name1",
+  description: "test_description1"
+})
 
-# location2 = Core::Location.create({
-#   address_id: address2.id,
-#   name: "test_name2",
-#   description: "test_description2"
-# })
+location2 = Core::Location.create({
+  address_id: address2.id,
+  name: "test_name2",
+  description: "test_description2"
+})
 
-# location3 = Core::Location.create({
-#   address_id: address3.id,
-#   name: "test_name3",
-#   description: "test_description3"
-# })
+location3 = Core::Location.create({
+  address_id: address3.id,
+  name: "test_name3",
+  description: "test_description3"
+})
 
 
 contact.addresses << address1
